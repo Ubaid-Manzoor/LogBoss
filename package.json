@@ -4,6 +4,7 @@
   "description": "",
   "version": "0.0.1",
   "icon": "images/logboss.png",
+  "publisher": "ubaid",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -14,7 +15,7 @@
     "onLanguage:javascript",
     "onLanguage:typescript"
   ],
-  "main": "./src/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
