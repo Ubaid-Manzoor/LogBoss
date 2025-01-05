@@ -20,37 +20,20 @@ class ConsoleAnalyzer {
         plugins: ["jsx", "typescript"],
         tokens: true,
         ranges: true,
-        comments: true, // Enable comment parsing
+        comments: true,
       });
 
-      // First collect all comment ranges
-      const commentedConsoleStatements = ast.comments
-        .filter((comment) => {
-          const commentCode = comment.value.replace(/^[\s*]+/gm, "");
-          const regex = /^\s*console\.(log|warn|error|info|debug|trace)\s*\(([\s\S]*?)\)\s*;?(\s*\/\/.*)?$/;
+      const commentedConsoleStatements = ast.comments.filter((comment) => {
+        const commentCode = comment.value.replace(/^[\s*]+/gm, "");
+        const regex = /^\s*console\.(log|warn|error|info|debug|trace)\s*\(([\s\S]*?)\)\s*;?(\s*\/\/.*)?$/;
+        return regex.test(commentCode);
+      });
 
-          // Test if the comment matches the pattern
-          return regex.test(commentCode);
-        })
-        .map((comment) => {
-          return {
-            ...comment,
-            value: comment.value.replace(/^[\s*]+/gm, ""),
-          };
-        });
-
-      // Traverse the AST to find console statements
       traverse(ast, {
         CallExpression(path) {
           if (path.node.callee.type === "MemberExpression" && path.node.callee.object.name === "console") {
             const statement = {
-              type: path.node.callee.property.name,
-              start: path.node.start,
-              end: path.node.end,
-              line: path.node.loc.start.line,
-              column: path.node.loc.start.column,
               loc: path.node.loc,
-              value: code.slice(path.node.start, path.node.end),
             };
 
             consoleStatements.push(statement);
@@ -63,8 +46,6 @@ class ConsoleAnalyzer {
       const decorationType = vscode.window.createTextEditorDecorationType({
         backgroundColor: new vscode.ThemeColor("editor.selectionBackground"),
       });
-
-      // Convert the console statements to ranges
 
       const decorationRanges = consoleStatements.map((statement) => {
         return new vscode.Range(
