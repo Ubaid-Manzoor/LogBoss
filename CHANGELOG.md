@@ -2,8 +2,13 @@
 
 All notable changes to the "logboss" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [1.0.0] - 2024-03-XX
 
-## [Unreleased]
-
-- Initial release
+### Added
+- Highlight console statements in active file
+  - Temporarily highlights all console.log statements
+  - Auto-removes highlighting after 5 seconds
+- Remove console statements functionality
+  - Removes both active and commented console statements
+  - Works with single-line and multi-line comments
+  - Preserves code formatting
