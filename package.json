@@ -22,6 +22,10 @@
       {
         "command": "logboss.removeConsoleHighlighting",
         "title": "LogBoss: Remove Console Highlighting"
+      },
+      {
+        "command": "logboss.removeConsoleLogs",
+        "title": "LogBoss: Remove Console Logs"
       }
     ]
   },

@@ -14,11 +14,7 @@ function activate(context) {
 
   // Example command to analyze console statements
   let highlightConsoles = vscode.commands.registerCommand("logboss.highlightConsoles", () => {
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) return;
-
-    const code = editor.document.getText();
-    consoleAnalyzer.highlightConsoleStatements(code);
+    consoleAnalyzer.highlightConsoleStatements();
   });
 
   // Example command to analyze console statements
@@ -26,8 +22,14 @@ function activate(context) {
     consoleAnalyzer.removeConsoleHighlighting();
   });
 
+  // Example command to analyze console statements
+  let removeConsoleLogStatements = vscode.commands.registerCommand("logboss.removeConsoleLogs", () => {
+    consoleAnalyzer.removeConsoleLogStatements();
+  });
+
   context.subscriptions.push(highlightConsoles);
   context.subscriptions.push(removeConsoleHighlighting);
+  context.subscriptions.push(removeConsoleLogStatements);
 }
 
 // This method is called when your extension is deactivated
