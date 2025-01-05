@@ -3,6 +3,7 @@
   "displayName": "LogBoss",
   "description": "",
   "version": "0.0.1",
+  "icon": "images/logboss.png",
   "engines": {
     "vscode": "^1.96.0"
   },
