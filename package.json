@@ -2,7 +2,7 @@
   "name": "logboss",
   "displayName": "LogBoss",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "images/logboss.png",
   "publisher": "ubaid",
   "engines": {
@@ -19,6 +19,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "logboss.showCommands",
+        "title": "LogBoss: Show Commands"
+      },
+      {
         "command": "logboss.highlightConsoles",
         "title": "LogBoss: Highlight Console"
       },
@@ -30,6 +34,20 @@
         "command": "logboss.removeConsoleLogs",
         "title": "LogBoss: Remove Console Logs"
       }
+    ],
+    "keybindings": [
+      {
+        "command": "logboss.showCommands",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "logboss.showCommands",
+        "key": "ctrl+shift+space",
+        "mac": "cmd+shift+space",
+        "when": "editorTextFocus"
+      }
     ]
   },
   "scripts": {
@@ -40,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ubaid-Manzoor/VarLens"
+    "url": "https://github.com/Ubaid-Manzoor/LogBoss"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
