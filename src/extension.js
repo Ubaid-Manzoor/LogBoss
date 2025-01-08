@@ -17,7 +17,7 @@ function activate(context) {
   // Create status bar item
   const logBossStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 
-  logBossStatusBar.text = "$(coffee) Boss";
+  logBossStatusBar.text = "☕ Boss";
   logBossStatusBar.tooltip = "Click to manage console logs";
   logBossStatusBar.command = "logboss.showCommands";
   logBossStatusBar.show();
