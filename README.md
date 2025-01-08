@@ -12,7 +12,7 @@ Command: `LogBoss: Highlight Console Statements`
 - Supports all console methods (log, warn, error, info, debug, trace)
 - Detects both active and single-line commented console statements
 
-### 2. Toggle Console Statement Comments
+### 2. Remove Console Highlighting Comments
 
 Command: `LogBoss: Remove Console Highlighting`
 

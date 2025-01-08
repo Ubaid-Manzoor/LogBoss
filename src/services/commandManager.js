@@ -4,14 +4,14 @@ class CommandManager {
   constructor() {
     this.commands = [
       {
-        label: "$(search) Highlight Console Logs",
-        description: "Highlight all console statements",
-        command: "logboss.highlightConsoles",
+        label: "$(search) Toggle Console Highlights",
+        description: "Highlight/unhighlight console statements",
+        command: "logboss.toggleHighlightConsoles",
       },
       {
-        label: "$(clear-all) Remove Highlighting",
-        description: "Remove console highlighting",
-        command: "logboss.removeConsoleHighlighting",
+        label: "$(comment) Toggle Console Comments",
+        description: "Comment/uncomment console statements",
+        command: "logboss.toggleConsoleComments",
       },
       {
         label: "$(trash) Remove Console Logs",
@@ -19,6 +19,13 @@ class CommandManager {
         command: "logboss.removeConsoleLogs",
       },
     ];
+  }
+
+  updateToggleDescription(isCommented) {
+    const toggleCommand = this.commands.find((cmd) => cmd.command === "logboss.toggleConsoleComments");
+    if (toggleCommand) {
+      toggleCommand.label = isCommented ? "$(comment) // Toggle Console Comments" : "$(comment) Toggle Console Comment";
+    }
   }
 
   showCommands() {
@@ -34,4 +41,4 @@ class CommandManager {
   }
 }
 
-module.exports = CommandManager; 
+module.exports = CommandManager;

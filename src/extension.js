@@ -24,11 +24,11 @@ function activate(context) {
 
   // Register commands
   let showCommands = vscode.commands.registerCommand("logboss.showCommands", () => commandManager.showCommands());
-  let highlightConsoles = vscode.commands.registerCommand("logboss.highlightConsoles", () => consoleAnalyzer.highlightConsoleStatements());
-  let removeConsoleHighlighting = vscode.commands.registerCommand("logboss.removeConsoleHighlighting", () => consoleAnalyzer.removeConsoleHighlighting());
+  let highlightConsoles = vscode.commands.registerCommand("logboss.toggleHighlightConsoles", () => consoleAnalyzer.ToggleHighlightConsoleStatements());
   let removeConsoleLogStatements = vscode.commands.registerCommand("logboss.removeConsoleLogs", () => consoleAnalyzer.removeConsoleLogStatements());
+  let toggleConsoleComments = vscode.commands.registerCommand("logboss.toggleConsoleComments", () => consoleAnalyzer.toggleConsoleComments(commandManager));
 
-  context.subscriptions.push(logBossStatusBar, showCommands, highlightConsoles, removeConsoleHighlighting, removeConsoleLogStatements);
+  context.subscriptions.push(logBossStatusBar, showCommands, highlightConsoles, removeConsoleLogStatements, toggleConsoleComments);
 }
 
 // This method is called when your extension is deactivated

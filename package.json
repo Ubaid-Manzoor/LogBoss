@@ -1,21 +1,53 @@
 {
   "name": "logboss",
   "displayName": "LogBoss",
-  "description": "",
-  "version": "0.0.2",
+  "description": "LogBoss is a VS Code extension that helps you manage console.log statements effortlessly. Quickly highlight or remove logs in your current file keeping your code clean and production-ready. 🚀",
+  "version": "0.0.7",
   "icon": "images/logboss.png",
   "publisher": "ubaid",
   "engines": {
     "vscode": "^1.96.0"
   },
+  "keywords": [
+    "console",
+    "log",
+    "console.log",
+    "debug",
+    "cleanup",
+    "logging",
+    "boss",
+    "log boss",
+    "logboss",
+    "remove log",
+    "console manager",
+    "console cleaner",
+    "console remover",
+    "console highlighter",
+    "debug cleanup",
+    "development tools",
+    "productivity",
+    "code cleanup",
+    "javascript",
+    "typescript",
+    "debugging",
+    "console.debug",
+    "console.error",
+    "console.warn",
+    "console.info",
+    "code quality",
+    "clean code"
+  ],
   "categories": [
+    "Formatters",
+    "Programming Languages",
+    "Debuggers",
     "Other"
   ],
   "activationEvents": [
     "onLanguage:javascript",
     "onLanguage:typescript"
   ],
-  "main": "./dist/extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
       {
@@ -23,12 +55,8 @@
         "title": "LogBoss: Show Commands"
       },
       {
-        "command": "logboss.highlightConsoles",
-        "title": "LogBoss: Highlight Console"
-      },
-      {
-        "command": "logboss.removeConsoleHighlighting",
-        "title": "LogBoss: Remove Console Highlighting"
+        "command": "logboss.toggleHighlightConsoles",
+        "title": "LogBoss: Toggle Highlight Console"
       },
       {
         "command": "logboss.removeConsoleLogs",
@@ -36,12 +64,6 @@
       }
     ],
     "keybindings": [
-      {
-        "command": "logboss.showCommands",
-        "key": "ctrl+alt+l",
-        "mac": "cmd+alt+l",
-        "when": "editorTextFocus"
-      },
       {
         "command": "logboss.showCommands",
         "key": "ctrl+shift+space",
