@@ -14,6 +14,8 @@ Command: `LogBoss: Toggle Console Highlights`
 - Detects both active and commented console statements
 - Handles multi-line console statements
 
+![Highlight Command](./gifs/highlight-command.gif)
+
 ### 2. Toggle Console Comments
 
 Command: `LogBoss: Toggle Console Comments`
@@ -22,6 +24,8 @@ Command: `LogBoss: Toggle Console Comments`
 - Smart indentation preservation
 - Handles multi-line console statements
 - Preserves code formatting
+
+![Comment Command](./gifs/comment-command.gif)
 
 ### 3. Remove Console Statements
 
@@ -32,6 +36,8 @@ Command: `LogBoss: Remove Console Statements`
 - Works with single-line and multi-line statements
 - Preserves code formatting and structure
 
+![Remove Console](./gifs/remove-console.gif)
+
 ## Usage
 
 1. Open a JavaScript/TypeScript file
@@ -40,6 +46,8 @@ Command: `LogBoss: Remove Console Statements`
    - Status bar icon (`☕ Boss`)
    - Keyboard shortcut (`Ctrl+Shift+Space` or `Cmd+Shift+Space`)
    - Right-click context menu
+
+![Status Bar Usage](./gifs/status-bar.gif)
 
 ## Coming Soon 🚀
 
