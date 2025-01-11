@@ -4,13 +4,20 @@ const { parse } = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
 
 class ConsoleAnalyzer {
-  constructor() {
+  constructor(stateManager) {
+    this.stateManager = stateManager;
     this.currentdecorationType = null;
     this.isHighlighted = false;
     this.isCommented = false;
 
-    vscode.window.onDidChangeActiveTextEditor(() => {
-      this.isHighlighted = false;
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+      if (editor) {
+        const state = this.stateManager.getFileState(editor.document.uri.fsPath);
+        this.isHighlighted = !state.isHighlighted;
+        this.ToggleHighlightConsoleStatements();
+
+        this.isCommented = state.isCommented;
+      }
     });
   }
 
@@ -131,6 +138,9 @@ class ConsoleAnalyzer {
       this.currentdecorationType = decorationType;
 
       this.isHighlighted = true;
+      this.stateManager.updateFileState(vscode.window.activeTextEditor.document.uri.fsPath, {
+        isHighlighted: true,
+      });
       return consoleStatements;
     } catch (error) {
       console.error("Error analyzing code:", error);
@@ -141,6 +151,9 @@ class ConsoleAnalyzer {
   removeConsoleHighlighting() {
     this?.currentdecorationType?.dispose();
     this.isHighlighted = false;
+    this.stateManager.updateFileState(vscode.window.activeTextEditor.document.uri.fsPath, {
+      isHighlighted: false,
+    });
   }
 
   async removeConsoleLogStatements() {
@@ -204,7 +217,7 @@ class ConsoleAnalyzer {
             if (!this.isLineCommented(lineText)) continue; // If not commented, skip
 
             // Uncomment: Remove // from the start
-            const uncommentedText = lineText.replace(/^\s*\/\/\s?/, "");
+            const uncommentedText = lineText.replace(/^(\s*)\/\/\s?/, "$1");
             const range = new vscode.Range(new vscode.Position(lineIndex, 0), new vscode.Position(lineIndex, lineText.length));
             editBuilder.replace(range, uncommentedText);
           } else {
@@ -219,9 +232,14 @@ class ConsoleAnalyzer {
         }
       });
       this.isCommented = !this.isCommented;
+      this.stateManager.updateFileState(editor.document.uri.fsPath, {
+        isCommented: this.isCommented,
+      });
       commandManager.updateToggleDescription(this.isCommented);
     });
   }
+
+  displayLogMessage() {}
 
   isLineCommented(lineText) {
     return /^\s*\/\//.test(lineText);

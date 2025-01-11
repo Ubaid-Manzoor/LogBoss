@@ -3,6 +3,7 @@
 const vscode = require("vscode");
 const ConsoleAnalyzer = require("./services/consoleAnalyzer.js");
 const CommandManager = require("./services/commandManager.js");
+const StateManager = require('./services/stateManager');
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -11,7 +12,8 @@ const CommandManager = require("./services/commandManager.js");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  const consoleAnalyzer = new ConsoleAnalyzer();
+  const stateManager = new StateManager(context);
+  const consoleAnalyzer = new ConsoleAnalyzer(stateManager);
   const commandManager = new CommandManager();
 
   // Create status bar item
@@ -27,8 +29,9 @@ function activate(context) {
   let highlightConsoles = vscode.commands.registerCommand("logboss.toggleHighlightConsoles", () => consoleAnalyzer.ToggleHighlightConsoleStatements());
   let removeConsoleLogStatements = vscode.commands.registerCommand("logboss.removeConsoleLogs", () => consoleAnalyzer.removeConsoleLogStatements());
   let toggleConsoleComments = vscode.commands.registerCommand("logboss.toggleConsoleComments", () => consoleAnalyzer.toggleConsoleComments(commandManager));
+  let displayLogMessage = vscode.commands.registerCommand("logboss.displayLogMessage", () => consoleAnalyzer.toggleConsoleComments(commandManager));
 
-  context.subscriptions.push(logBossStatusBar, showCommands, highlightConsoles, removeConsoleLogStatements, toggleConsoleComments);
+  context.subscriptions.push(logBossStatusBar, showCommands, highlightConsoles, removeConsoleLogStatements, toggleConsoleComments, displayLogMessage);
 }
 
 // This method is called when your extension is deactivated

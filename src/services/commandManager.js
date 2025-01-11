@@ -37,6 +37,7 @@ class CommandManager {
         if (selection) {
           vscode.commands.executeCommand(selection.command);
         }
+
       });
   }
 }
