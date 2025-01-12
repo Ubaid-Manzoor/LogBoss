@@ -2,7 +2,7 @@
   "name": "logboss",
   "displayName": "LogBoss",
   "description": "LogBoss is a VS Code extension that helps you manage console.log statements effortlessly. Quickly highlight or remove logs in your current file keeping your code clean and production-ready. 🚀",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "icon": "images/logboss.png",
   "publisher": "ubaid",
   "engines": {

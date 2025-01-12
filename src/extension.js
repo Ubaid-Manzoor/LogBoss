@@ -3,7 +3,7 @@
 const vscode = require("vscode");
 const ConsoleAnalyzer = require("./services/consoleAnalyzer.js");
 const CommandManager = require("./services/commandManager.js");
-const StateManager = require('./services/stateManager');
+const StateManager = require("./services/stateManager");
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -18,20 +18,22 @@ function activate(context) {
 
   // Create status bar item
   const logBossStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-
-  logBossStatusBar.text = "☕ Boss";
-  logBossStatusBar.tooltip = "Click to manage console logs";
+  logBossStatusBar.text = "☕ oss";
+  logBossStatusBar.tooltip = "Manage Console Logs";
   logBossStatusBar.command = "logboss.showCommands";
   logBossStatusBar.show();
 
   // Register commands
-  let showCommands = vscode.commands.registerCommand("logboss.showCommands", () => commandManager.showCommands());
-  let highlightConsoles = vscode.commands.registerCommand("logboss.toggleHighlightConsoles", () => consoleAnalyzer.ToggleHighlightConsoleStatements());
-  let removeConsoleLogStatements = vscode.commands.registerCommand("logboss.removeConsoleLogs", () => consoleAnalyzer.removeConsoleLogStatements());
-  let toggleConsoleComments = vscode.commands.registerCommand("logboss.toggleConsoleComments", () => consoleAnalyzer.toggleConsoleComments(commandManager));
-  let displayLogMessage = vscode.commands.registerCommand("logboss.displayLogMessage", () => consoleAnalyzer.toggleConsoleComments(commandManager));
+  let disposables = [
+    vscode.commands.registerCommand("logboss.showCommands", () => commandManager.showCommands()),
+    vscode.commands.registerCommand("logboss.highlightConsoles", () => consoleAnalyzer.highlightConsoleStatements()),
+    vscode.commands.registerCommand("logboss.removeHighlights", () => consoleAnalyzer.removeConsoleHighlighting()),
+    vscode.commands.registerCommand("logboss.commentConsoleLogs", async (filePath) => await consoleAnalyzer.commentConsoleLogs(filePath)),
+    vscode.commands.registerCommand("logboss.uncommentConsoleLogs", async (filePath) => await consoleAnalyzer.uncommentConsoleLogs(filePath)),
+    vscode.commands.registerCommand("logboss.removeConsoleLogs", async (filePath) => await consoleAnalyzer.removeConsoleLogStatements(filePath)),
+  ];
 
-  context.subscriptions.push(logBossStatusBar, showCommands, highlightConsoles, removeConsoleLogStatements, toggleConsoleComments, displayLogMessage);
+  context.subscriptions.push(logBossStatusBar, ...disposables);
 }
 
 // This method is called when your extension is deactivated
