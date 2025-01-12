@@ -32,3 +32,11 @@ All notable changes to the "logboss" extension will be documented in this file.
 
 ### Removed
 - Removed separate "Remove Highlighting" command in favor of toggle functionality
+
+
+## [0.0.11]
+
+### Added
+- Add state management for file states
+- Add multiple file/folder support
+
